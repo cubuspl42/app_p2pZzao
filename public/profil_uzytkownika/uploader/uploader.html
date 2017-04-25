@@ -1,0 +1,43 @@
+<h3>
+    Dodawanie alubmów zdjęć
+</h3>
+
+<form class="form-horizontal">
+
+    <div>
+
+        <div class="input-group">
+            <span class="input-group-addon">Nazwa albumu</span>
+            <input type="text" class="form-control" id="galery" placeholder="Nazwa Albumu" data-ng-model="$ctrl.album.name">
+            <div class="input-group-btn">
+                <span class="btn btn-default" ng-click="$ctrl.selectFiles()">Dodaj zdjecia</span>
+            </div>
+        </div>
+        <br/>
+
+        <div style="display: flex; flex-wrap: wrap">
+
+            <div style="width: 250px; margin: 5px" ng-repeat="file in $flow.files" class="gallery-box">
+
+
+                <div class="thumbnail">
+                    <img ng-src="file" style="height: 250px; width: 250px" />
+                </div>
+                <div class="btn-group" style="display: flex;flex-direction: column;">
+                    <a class="btn btn-xs btn-danger" ng-click="file.cancel()">
+                                Usun
+                            </a>
+                </div>
+                <span class="title" style="word-wrap: break-word;">{{file.name}}</span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div>
+            <div class="pull-right">
+                <button style="margin: 7px" type="submit" class="btn btn-default" ng-click="$ctrl.upload()">
+                            Zapisz
+                        </button>
+            </div>
+        </div>
+    </div>
+</form>

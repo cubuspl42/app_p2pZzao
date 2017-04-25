@@ -1,0 +1,52 @@
+<div>
+    <div class="jumbotron">
+        <div ng-if="$ctrl.editable" style="display: flex">
+            <div>
+                <div >
+                    <div >
+                        <div class="thumbnail" style="height: 250px; width: 250px">
+                            <img ng-src="{{photo.toDataURL()}}" style="height: 240px; width: 250px" ng-click="upload_profile()"/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <div style="margin: 5px">
+                    <input type="text" class="form-control input-lg" id="imie" placeholder="Nazwisko i imie" data-ng-model="profile.full_name">
+                </div>
+
+                <div class="input-group has-success">
+                    <span class="input-group-addon" id="basic-addon3">Torrent hash</span>
+                    <input type="text" class="form-control" id="torrent" placeholder="Loading..." data-ng-model="profile.torrent_id"
+                        disabled="disabled">
+                    <span class="input-group-btn">
+                        <button class="btn btn-info" ng-click="$ctrl.copyToClipboard()">Kopiuj do schowka</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div ng-if="!$ctrl.editable" style="display: flex">
+            <div>
+                <img class="thumbnail" ng-src="{{photo.toDataURL()}}" alt="" style="height: 250px; width: 250px">
+            </div>
+            <h1 style="margin: 5px">{{profile.full_name}}</h1>
+        </div>
+    </div>
+
+    <uib-tabset active="activeJustified" justified="true">
+        <uib-tab index="0" heading="Szczegoly">
+            <details-component profile="profile" photo="photo" post="post" editable="$ctrl.editable"></details-component>
+        </uib-tab>
+        <uib-tab index="1" heading="Posty">
+            <posts-component posts="posts" post="post" editable="$ctrl.editable"></posts-component>
+        </uib-tab>
+        <uib-tab index="2" heading="Albumy">
+            <albums-component photos="photos" post="post"></albums-component>
+        </uib-tab>
+        <uib-tab index="3" heading="Zdjecia" ng-if="$ctrl.editable">
+            <uploader-component post="post"></uploader-component>
+        </uib-tab>
+    </uib-tabset>
+
+</div>
